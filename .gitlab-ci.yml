@@ -63,7 +63,7 @@ release-docker:
       fi
     - |
       for image in $IMAGE_NAMES; do
-        docker buildx build --provenance mode=max --platform $PLATFORM -t $image . --push
+        docker buildx build --provenance false --platform $PLATFORM -t $image . --push
       done
     - |
       echo "Container image pushed. You can pull it with";
