@@ -63,10 +63,13 @@ release-docker:
       fi
     - |
       for image in $IMAGE_NAMES; do
-        docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t $image . --push
+        docker buildx build --platform $PLATFORM -t $image . --push
       done
     - |
       echo "Container image pushed. You can pull it with";
       for image in $IMAGE_NAMES; do
         echo "docker pull $image"
       done
+  parallel:
+    matrix:
+      - PLATFORM: [linux/amd64, linux/arm64, linux/arm/v7]
