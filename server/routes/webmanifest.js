@@ -22,8 +22,8 @@ module.exports = async function(req, res) {
     start_url: '/',
     display: 'standalone',
     orientation: 'portrait',
-    theme_color: '#220033',
-    background_color: 'white'
+    theme_color: '#4B5A50',
+    background_color: '#F1EEE3'
   };
   res.set('Content-Type', 'application/manifest+json');
   res.json(manifest);

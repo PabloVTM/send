@@ -147,3 +147,5 @@ shareLinkButton = Κοινή χρήση συνδέσμου
 shareMessage = Λήψη του “{ $name }” με το { -send-brand }: απλός και ασφαλής διαμοιρασμός αρχείων
 trailheadPromo = Υπάρχει τρόπος να προστατέψετε το απόρρητό σας. Γίνετε μέλος του Firefox.
 learnMore = Μάθετε περισσότερα.
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = Συντηρείται από { $name }

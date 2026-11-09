@@ -156,3 +156,5 @@ shareLinkButton = Udostępnij odnośnik
 shareMessage = Pobierz „{ $name }” za pomocą { -send-brand }: prostego i bezpiecznego udostępniania plików
 trailheadPromo = Jest sposób na ochronę swojej prywatności. Dołącz do Firefoksa.
 learnMore = Więcej informacji.
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = Utrzymywane przez { $name }

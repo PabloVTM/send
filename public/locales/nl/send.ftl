@@ -33,6 +33,8 @@ footerLinkDonate = Doneren
 footerLinkCli = CLI
 footerLinkDmca = DMCA
 footerLinkSource = Broncode
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = Onderhouden door { $name }
 passwordTryAgain = Onjuist wachtwoord. Probeer het opnieuw.
 javascriptRequired = Send vereist JavaScript
 whyJavascript = Waarom vereist Send JavaScript?

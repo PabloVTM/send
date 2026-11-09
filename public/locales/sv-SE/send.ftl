@@ -147,3 +147,5 @@ shareLinkButton = Dela länk
 shareMessage = Ladda ner "{ $name }" med { -send-brand }: enkel, säker fildelning
 trailheadPromo = Det finns ett sätt att skydda din integritet. Gå med i Firefox.
 learnMore = Läs mer.
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = Underhålls av { $name }

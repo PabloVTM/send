@@ -133,3 +133,5 @@ shareLinkButton = 링크 공유
 shareMessage = { -send-brand }으로 “{ $name }” 파일을 내려받으세요: 쉽고 안전한 파일 공유입니다.
 trailheadPromo = 개인 정보를 보호하는 방법이 있습니다. Firefox에 가입하세요.
 learnMore = 더 알아보기.
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = 관리자: { $name }

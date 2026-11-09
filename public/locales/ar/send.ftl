@@ -183,3 +183,5 @@ shareLinkButton = شارِك الرابط
 shareMessage = نزِّل ”{ $name }“ عبر { -send-brand }: خدمة لمشاركة الملفات بلا عناء وبخصوصية تامة
 trailheadPromo = يمكنك حماية خصوصيتك، طبعا. انضم إلى فَيَرفُكس.
 learnMore = اطّلع على المزيد.
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = يصونه { $name }

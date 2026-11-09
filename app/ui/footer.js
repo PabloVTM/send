@@ -65,6 +65,15 @@ class Footer extends Component {
       `);
     }
 
+    // Credit the maintainer of this fork
+    links.push(html`
+      <li class="m-2">
+        <a href="https://github.com/PabloVTM" target="_blank" rel="noopener">
+          ${translate('footerForkCredit', { name: 'PabloVTM' })}
+        </a>
+      </li>
+    `);
+
     // Defining a custom footer
     var footer = [];
     if (this.state != undefined && this.state.WEB_UI != undefined) {

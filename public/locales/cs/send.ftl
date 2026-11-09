@@ -192,3 +192,5 @@ shareLinkButton = Sdílet odkaz
 shareMessage = Stáhněte si soubor „{ $name }“ se { -send-brand(case: "ins") } - jednoduché a bezpečné sdílení souborů
 trailheadPromo = Existuje způsob, jak ochránit své soukromí. Používejte Firefox.
 learnMore = Zjistit více.
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = Spravuje { $name }

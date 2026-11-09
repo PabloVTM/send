@@ -13,8 +13,8 @@ html {
 :root {
   --violet-gradient: linear-gradient(
     -180deg,
-    rgb(144 89 255 / 80%) 0%,
-    rgb(144 89 255 / 40%) 100%
+    rgb(75 90 80 / 80%) 0%,
+    rgb(75 90 80 / 40%) 100%
   );
 }
 
@@ -24,7 +24,12 @@ a {
 }
 
 a:focus {
-  outline: 1px dotted grey;
+  outline: 2px solid #f20b0b;
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: rgb(242 11 11 / 20%);
 }
 
 body {
@@ -136,12 +141,12 @@ footer li a:hover {
 }
 
 .feedback-link {
-  background-color: #000;
+  background-color: #1f2622;
   background-image: url('../assets/feedback.svg');
   background-position: 0.125rem 0.25rem;
   background-repeat: no-repeat;
   background-size: 1.125rem;
-  color: #fff;
+  color: #f1eee3;
   display: block;
   font-size: 0.75rem;
   line-height: 0.75rem;
@@ -165,6 +170,29 @@ footer li a:hover {
 .main-header img {
   height: 32px;
   width: auto;
+}
+
+/* PabloSystems prompt next to the wordmark, from tablet width up */
+.terminal-prompt {
+  @apply hidden font-mono font-bold text-sm whitespace-nowrap ml-4;
+}
+
+.terminal-cursor {
+  @apply text-detail;
+
+  animation: terminal-blink 1.1s steps(1) infinite;
+}
+
+@keyframes terminal-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terminal-cursor {
+    animation: none;
+  }
 }
 
 .text-underline {
@@ -269,6 +297,10 @@ select {
     width: auto;
   }
 
+  .terminal-prompt {
+    @apply inline;
+  }
+
   .main {
     @apply flex-1;
     @apply self-center;
@@ -333,8 +365,8 @@ select {
   }
 
   .shadow-big {
-    box-shadow: 0 12px 18px 2px rgb(34 0 51 / 4%),
-      0 6px 22px 4px rgb(7 48 114 / 12%), 0 6px 10px -4px rgb(14 13 26 / 12%);
+    box-shadow: 0 12px 18px 2px rgb(31 38 34 / 4%),
+      0 6px 22px 4px rgb(75 90 80 / 12%), 0 6px 10px -4px rgb(31 38 34 / 12%);
   }
 }
 

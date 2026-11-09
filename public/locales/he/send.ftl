@@ -150,3 +150,5 @@ shareLinkButton = שיתוף קישור
 shareMessage = הורדת ״{ $name }״ עם { -send-brand }: שיתוף קבצים פשוט ובטוח
 trailheadPromo = ישנן דרכים נוספות להגן על הפרטיות שלכם. הצטרפו אל Firefox.
 learnMore = מידע נוסף.
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = מתוחזק על ידי { $name }

@@ -85,8 +85,8 @@ See the table below for the variables and their default values.
 
 | Name | Default | Description |
 |---|---|---|
-| UI_COLOR_PRIMARY | #0a84ff | The primary color |
-| UI_COLOR_ACCENT | #003eaa | The accent color (eg. for hover-effects) |
+| UI_COLOR_PRIMARY | #4B5A50 | The primary color (Deep Sage Green); in dark mode, text and outlines use a lighter tint of it |
+| UI_COLOR_ACCENT | #3E4B43 | The accent color (eg. for hover-effects) |
 | UI_CUSTOM_ASSETS_ANDROID_CHROME_192PX | | A custom icon for Android (192x192px) |
 | UI_CUSTOM_ASSETS_ANDROID_CHROME_512PX | | A custom icon for Android (512x512px) |
 | UI_CUSTOM_ASSETS_APPLE_TOUCH_ICON | | A custom icon for Apple |

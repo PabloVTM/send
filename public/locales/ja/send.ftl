@@ -138,3 +138,5 @@ shareLinkButton = リンクを共有
 shareMessage = { -send-brand } で "{ $name }" をダウンロード: シンプルで安全なファイル共有
 trailheadPromo = プライバシーを保護する方法があります。Firefox を試してください。
 learnMore = 詳細情報
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = メンテナー: { $name }

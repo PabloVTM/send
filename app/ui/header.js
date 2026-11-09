@@ -50,6 +50,12 @@ class Header extends Component {
               <svg viewBox="66 0 340 64" class="w-48 md:w-64">
                 <use xlink:href="${assetMap.wordmark}" />
               </svg>
+              <span class="terminal-prompt" aria-hidden="true">
+                <span class="text-primary">pablo@systems</span
+                ><span class="text-grey-60 dark:text-grey-40">:</span
+                ><span class="text-detail-ink">~/send</span
+                ><span class="terminal-cursor">_</span>
+              </span>
             </a>
           `;
     return html`

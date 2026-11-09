@@ -147,3 +147,5 @@ shareLinkButton = Hivatkozás megosztása
 shareMessage = „{ $name }” letöltése a { -send-brand } segítségével: egyszerű, biztonságos fájlmegosztás
 trailheadPromo = Védje meg a magánszféráját. Csatlakozzon a Firefoxhoz.
 learnMore = További tudnivalók.
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = Karbantartó: { $name }

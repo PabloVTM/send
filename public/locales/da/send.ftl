@@ -147,3 +147,5 @@ shareLinkButton = Del link
 shareMessage = Hent { $name } med { -send-brand } - simpel og sikker fildeling
 trailheadPromo = Beskyt dine digitale rettigheder. Slut dig til Firefox.
 learnMore = Læs mere.
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = Vedligeholdt af { $name }

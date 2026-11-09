@@ -3,9 +3,16 @@ const assets = require('../common/assets');
 const initScript = require('./initScript');
 
 module.exports = function(state, body = '') {
-  const custom_css = state.ui.assets.custom_css !== ''
-    ? html`<link rel="stylesheet" type="text/css" href="${state.ui.assets.custom_css}" />`
-    : ''
+  const custom_css =
+    state.ui.assets.custom_css !== ''
+      ? html`
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="${state.ui.assets.custom_css}"
+          />
+        `
+      : '';
 
   return html`
     <!DOCTYPE html>
@@ -28,15 +35,32 @@ module.exports = function(state, body = '') {
         <meta property="og:image" content="${state.ui.assets.facebook}" />
         <meta name="twitter:image" content="${state.ui.assets.twitter}" />
         <meta property="og:url" content="${state.baseUrl}" />
-        <meta name="theme-color" content="#220033" />
-        <meta name="msapplication-TileColor" content="#220033" />
+        <meta name="theme-color" content="#4B5A50" />
+        <meta name="msapplication-TileColor" content="#4B5A50" />
 
         <link rel="manifest" href="/app.webmanifest" />
-        <link rel="stylesheet" type="text/css" href="/inter.css" />
         <style nonce=${state.cspNonce}>
           :root {
             --color-primary: ${state.ui.colors.primary};
             --color-primary-accent: ${state.ui.colors.accent};
+            --color-primary-ink: var(--color-primary);
+            --color-primary-accent-ink: var(--color-primary-accent);
+            --color-detail-ink: #c40808;
+          }
+          @media (prefers-color-scheme: dark) {
+            :root {
+              --color-primary-ink: color-mix(
+                in srgb,
+                var(--color-primary) 40%,
+                #f1eee3
+              );
+              --color-primary-accent-ink: color-mix(
+                in srgb,
+                var(--color-primary) 25%,
+                #f1eee3
+              );
+              --color-detail-ink: #ff7a70;
+            }
           }
         </style>
         <link
@@ -65,7 +89,7 @@ module.exports = function(state, body = '') {
         <link
           rel="mask-icon"
           href="${state.ui.assets.safari_pinned_tab}"
-          color="#838383"
+          color="#4B5A50"
         />
         <script defer src="${assets.get('app.js')}"></script>
       </head>

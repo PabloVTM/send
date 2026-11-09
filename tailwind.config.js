@@ -1,26 +1,40 @@
+// PabloSystems theme: Deep Sage Green #4B5A50, Warm Ivory #F1EEE3 and Vibrant
+// Vermillion Red #F20B0B for details. The grey ramp is tinted to match: the
+// light steps are ivory surfaces and borders, the dark steps sage-black
+// surfaces. Text colors keep at least 4.5:1 on the surfaces they are used on.
 const colors = {
   transparent: 'transparent',
   primary: 'var(--color-primary)',
   primary_accent: 'var(--color-primary-accent)',
 
-  black: '#000000',
-  'grey-90': '#0c0c0d',
-  'grey-80': '#2a2a2e',
-  'grey-70': '#38383d',
-  'grey-60': '#4a4a4f',
-  'grey-50': '#737373',
-  grey: '#b1b1b3',
-  'grey-40': '#b1b1b3',
-  'grey-30': '#d7d7db',
-  'grey-banner': '#f0f0f4',
-  'grey-transparent': 'hsla(250, 13%, 9%, .2)',
-  'grey-20': '#ededf0',
-  'grey-10': '#f9f9fa',
-  white: '#ffffff',
+  black: '#1f2622',
+  'grey-90': '#252c28',
+  'grey-80': '#2e3731',
+  'grey-70': '#4b5a50',
+  'grey-60': '#535e57',
+  'grey-50': '#99a198',
+  grey: '#c9c6b9',
+  'grey-40': '#c9c6b9',
+  'grey-30': '#d3cdbb',
+  'grey-banner': '#e7e3d6',
+  'grey-transparent': 'hsla(140, 9%, 13%, .2)',
+  'grey-20': '#e7e3d6',
+  'grey-10': '#f1eee3',
+  white: '#f8f6ef',
 
-  cloud: 'rgba(255, 255, 255, 0.8)',
-  violet: 'hsl(258, 57%, 35%)'
+  cloud: 'rgba(248, 246, 239, 0.8)',
+  violet: '#3e4b43',
+  detail: '#f20b0b',
+  'detail-ink': 'var(--color-detail-ink)'
 };
+
+// Text and borders use an "ink" variant of the primary colors, which is the
+// primary itself in light mode and a lighter tint of it in dark mode, so links
+// and outlines stay readable on dark surfaces.
+const inkColors = Object.assign({}, colors, {
+  primary: 'var(--color-primary-ink)',
+  primary_accent: 'var(--color-primary-accent-ink)'
+});
 
 module.exports = {
   purge: false,
@@ -34,39 +48,25 @@ module.exports = {
       dark: { raw: '(prefers-color-scheme: dark)' }
     },
     fontFamily: {
+      // system monospace fonts only: nothing to download, works offline
       sans: [
-        'Inter',
-        'system-ui',
-        'BlinkMacSystemFont',
-        '-apple-system',
-        'Segoe UI',
-        'Roboto',
-        'Oxygen',
-        'Ubuntu',
-        'Cantarell',
-        'Fira Sans',
-        'Droid Sans',
-        'Helvetica Neue',
-        'sans-serif'
-      ],
-      serif: [
-        'Constantia',
-        'Lucida Bright',
-        'Lucidabright',
-        'Lucida Serif',
-        'Lucida',
-        'DejaVu Serif',
-        'Bitstream Vera Serif',
-        'Liberation Serif',
-        'Georgia',
-        'serif'
-      ],
-      mono: [
+        'ui-monospace',
+        'SFMono-Regular',
+        'SF Mono',
         'Menlo',
-        'Monaco',
         'Consolas',
         'Liberation Mono',
-        'Courier New',
+        'DejaVu Sans Mono',
+        'monospace'
+      ],
+      mono: [
+        'ui-monospace',
+        'SFMono-Regular',
+        'SF Mono',
+        'Menlo',
+        'Consolas',
+        'Liberation Mono',
+        'DejaVu Sans Mono',
         'monospace'
       ]
     },
@@ -103,7 +103,7 @@ module.exports = {
       normal: '0',
       wide: '0.05em'
     },
-    textColor: colors,
+    textColor: inkColors,
     backgroundColor: colors,
     backgroundSize: {
       auto: 'auto',
@@ -117,7 +117,10 @@ module.exports = {
       '4': '4px',
       '8': '8px'
     },
-    borderColor: global.Object.assign({ default: colors['grey-30'] }, colors),
+    borderColor: global.Object.assign(
+      { default: colors['grey-30'] },
+      inkColors
+    ),
     borderRadius: {
       none: '0',
       sm: '.125rem',

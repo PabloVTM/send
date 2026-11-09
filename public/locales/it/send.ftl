@@ -139,3 +139,5 @@ shareLinkButton = Condividi link
 shareMessage = Scarica “{ $name }” con { -send-brand }: condivisione di file semplice e sicura
 trailheadPromo = C’è un modo per proteggere la tua privacy. Entra in Firefox.
 learnMore = Ulteriori informazioni.
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = Gestito da { $name }

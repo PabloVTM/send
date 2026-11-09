@@ -147,3 +147,5 @@ shareLinkButton = Comparteix l'enllaç
 shareMessage = Baixeu «{ $name }» amb el { -send-brand }: compartició de fitxers senzilla i segura
 trailheadPromo = Hi ha una manera de protegir la vostra privadesa. Uniu-vos al Firefox.
 learnMore = Més informació.
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = Mantingut per { $name }

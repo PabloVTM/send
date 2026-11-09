@@ -143,3 +143,5 @@ shareLinkButton = Bağlantıyı paylaş
 shareMessage = “{ $name }” dosyasını { -send-brand } ile indirin: basit ve güvenli dosya paylaşımı
 trailheadPromo = Gizliliğinizi korumanın bir yolu var. Firefox’a katılın.
 learnMore = Daha fazla bilgi alın.
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = Bakımı yapan: { $name }

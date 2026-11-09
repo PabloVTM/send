@@ -147,3 +147,5 @@ shareLinkButton = Jaa linkki
 shareMessage = Lataa tiedosto ”{ $name }” { -send-brand } -palvelusta: yksinkertaista ja turvallista tiedostonjakoa
 trailheadPromo = On tapa suojata yksityisyyttään. Liity Firefoxiin.
 learnMore = Lue lisää.
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = Ylläpitäjä: { $name }

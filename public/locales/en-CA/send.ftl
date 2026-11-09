@@ -149,3 +149,5 @@ trailheadPromo = There is a way to protect your privacy. Join Firefox.
 learnMore = Learn more.
 
 sponsoredByThunderbird = Sponsored by Thunderbird
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = Maintained by { $name }

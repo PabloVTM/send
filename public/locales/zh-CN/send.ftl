@@ -31,6 +31,8 @@ footerLinkDonate = 捐助
 footerLinkCli = 命令行
 footerLinkDmca = DMCA
 footerLinkSource = 源代码
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = 维护者：{ $name }
 passwordTryAgain = 密码不正确。请重试。
 javascriptRequired = Send 需要 JavaScript
 whyJavascript = 为什么 Send 需要 JavaScript？

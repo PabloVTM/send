@@ -31,6 +31,8 @@ footerLinkDonate = Donate
 footerLinkCli = CLI
 footerLinkDmca = DMCA
 footerLinkSource = Source
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = Maintained by { $name }
 passwordTryAgain = Incorrect password. Try again.
 javascriptRequired = Send requires JavaScript
 whyJavascript = Why does Send require JavaScript?

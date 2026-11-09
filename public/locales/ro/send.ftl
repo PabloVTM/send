@@ -156,3 +156,5 @@ shareLinkButton = Partajează linkul
 shareMessage = Descarcă „{ $name }” cu { -send-brand }: partajare simplă și sigură a fișierelor
 trailheadPromo = Există o modalitate de a-ți proteja viața privată. Folosește Firefox.
 learnMore = Află mai multe.
+# Footer credit for the maintainer of this fork; $name is a GitHub username
+footerForkCredit = Întreținut de { $name }
