@@ -1,172 +1,119 @@
-# [![Send](./assets/icon-64x64.png)](https://gitlab.com/timvisee/send/) Send
+<p align="center">
+  <img width="64" src="./assets/icon-64x64.png" alt="Send logo" />
+</p>
 
-[![Build status on GitLab CI][gitlab-ci-master-badge]][gitlab-ci-link]
-[![Latest release][release-badge]][release-link]
-[![Docker image][docker-image-badge]][docker-image-link]
-[![Project license][repo-license-badge]](LICENSE)
+# Send (fork)
 
-[docker-image-badge]: https://img.shields.io/badge/docker-latest-blue.svg
-[docker-image-link]: https://gitlab.com/timvisee/send/container_registry/eyJuYW1lIjoidGltdmlzZWUvc2VuZCIsInRhZ3NfcGF0aCI6Ii90aW12aXNlZS9zZW5kL3JlZ2lzdHJ5L3JlcG9zaXRvcnkvMTQxODUwNC90YWdzP2Zvcm1hdD1qc29uIiwiaWQiOjE0MTg1MDQsImNsZWFudXBfcG9saWN5X3N0YXJ0ZWRfYXQiOm51bGx9
-[gitlab-ci-link]: https://gitlab.com/timvisee/send/pipelines
-[gitlab-ci-master-badge]: https://gitlab.com/timvisee/send/badges/master/pipeline.svg
-[release-badge]: https://img.shields.io/github/v/tag/timvisee/send
-[release-link]: https://gitlab.com/timvisee/send/-/tags
-[repo-license-badge]: https://img.shields.io/github/license/timvisee/send.svg
+Simple, private file sharing: files are encrypted end to end in the browser, and the share link expires automatically after a number of downloads or a delay.
 
-A fork of Mozilla's [Firefox Send][mozilla-send].
-Mozilla discontinued Send, this fork is a community effort to keep the project
-up-to-date and alive.
+This is a fork of [timvisee/send](https://gitlab.com/timvisee/send), the community continuation of Mozilla's Firefox Send. It is maintained at [PabloVTM/send](https://github.com/PabloVTM/send) with the PabloSystems theme shared with the other PabloVTM tools: Deep Sage Green `#4B5A50`, Warm Ivory `#F1EEE3` and Vibrant Vermillion Red `#F20B0B` for details, system monospace fonts and a `pablo@systems:~/send` prompt next to the logo, in light and dark modes. It stays compatible with the [`ffsend`](https://github.com/timvisee/ffsend) CLI.
 
-- Forked [at][fork-commit] Mozilla's last publicly hosted version
-- _Mozilla_ & _Firefox_ branding [is][remove-branding-pr] removed so you can legally self-host
-- Kept compatible with [`ffsend`][ffsend] (CLI for Send)
-- Dependencies have been updated
-- Mozilla's [changes][mozilla-patches] since the fork have been selectively [merged][mozilla-patches-pr]
-- Mozilla's experimental report feature, download tokens, trust warnings and FxA changes are not included
+**Docs:** [Docker](docs/docker.md), [FAQ](docs/faq.md), [Encryption](docs/encryption.md), [Build](docs/build.md), [Deployment](docs/deployment.md), [Localization](docs/localization.md)
 
-Find an up-to-date Docker image here: [docs/docker.md](docs/docker.md)
+## Image
 
-The original project by Mozilla can be found [here][mozilla-send].
-The [`mozilla-master`][branch-mozilla-master] branch holds the `master` branch
-as left by Mozilla.
-The [`send-v3`][branch-send-v3] branch holds the commit tree of Mozilla's last
-publicly hosted version, which this fork is based on.
-The [`send-v4`][branch-send-v4] branch holds the commit tree of Mozilla's last
-experimental version which was still a work in progress (featuring file
-reporting, download tokens, trust warnings and FxA changes), this has
-selectively been merged into this fork.
-Please consider to [donate][donate] to allow me to keep working on this.
+Images are published to GitHub Container Registry for `linux/amd64` and `linux/arm64`:
 
-Thanks [Mozilla][mozilla] for building this amazing tool!
+| Tag | Content |
+| --- | --- |
+| `ghcr.io/pablovtm/send:latest` | Latest build of `master`. |
+| `ghcr.io/pablovtm/send:YYYY-MM-DD` | Dated version, e.g. `2026-11-09`. Each build upgrades the Alpine packages, so a new dated version also brings the latest Alpine security fixes. |
 
-[branch-mozilla-master]: https://gitlab.com/timvisee/send/-/tree/mozilla-master
-[branch-send-v3]: https://gitlab.com/timvisee/send/-/tree/send-v3
-[branch-send-v4]: https://gitlab.com/timvisee/send/-/tree/send-v4
-[donate]: https://timvisee.com/donate
-[ffsend]: https://github.com/timvisee/ffsend
-[fork-commit]: https://gitlab.com/timvisee/send/-/commit/3e9be676413a6e1baaf6a354c180e91899d10bec
-[mozilla-patches-pr]: https://gitlab.com/timvisee/send/-/merge_requests/3
-[mozilla-patches]: https://gitlab.com/timvisee/send/-/compare/3e9be676413a6e1baaf6a354c180e91899d10bec...mozilla-master
-[mozilla-send]: https://github.com/mozilla/send
-[mozilla]: https://mozilla.org/
-[remove-branding-pr]: https://gitlab.com/timvisee/send/-/merge_requests/2
+## Quick start
 
----
+Send needs Redis for its metadata. Files are stored on the local disk by default, or on S3 or Google Cloud Storage.
 
-**Docs:** [FAQ](docs/faq.md), [Encryption](docs/encryption.md), [Build](docs/build.md), [Docker](docs/docker.md), [More](docs/)
+```yaml
+services:
+  send:
+    image: ghcr.io/pablovtm/send:latest
+    restart: unless-stopped
+    ports:
+      - 1443:1443
+    environment:
+      - BASE_URL=http://localhost:1443
+      - REDIS_HOST=redis
+      - FILE_DIR=/uploads
+    volumes:
+      - ./uploads:/uploads
+    depends_on:
+      - redis
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - ./redis:/data
+```
 
----
+The uploads directory must be writable by the container user (uid `1000`):
 
-## Table of Contents
+```bash
+mkdir -p uploads && sudo chown 1000:1000 uploads
+```
 
-* [What it does](#what-it-does)
-* [Requirements](#requirements)
-* [Development](#development)
-* [Commands](#commands)
-* [Configuration](#configuration)
-* [Localization](#localization)
-* [Contributing](#contributing)
-* [Instances](#instances)
-* [Deployment](#deployment)
-* [Clients](#clients)
-* [License](#license)
+Then open http://localhost:1443. The container reports its health on `/__heartbeat__` (storage and Redis) and `/__lbheartbeat__` (process only).
 
----
+To share files with others, set `BASE_URL` to the public HTTPS URL and put a reverse proxy with TLS termination in front of Send: the browser crypto APIs it relies on only work over HTTPS (or on `localhost`).
 
-## What it does
+## Configuration
 
-A file sharing experiment which allows you to send encrypted files to other users.
+The server is configured with environment variables. The most common ones:
 
----
+| Variable | Purpose |
+| --- | --- |
+| `BASE_URL` | Public URL of the instance, e.g. `https://send.example.com`. |
+| `REDIS_HOST`, `REDIS_PORT`, `REDIS_PASSWORD` | Redis connection. |
+| `FILE_DIR` | Local storage directory (when not using S3 or GCS). |
+| `S3_BUCKET`, `S3_ENDPOINT`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | S3 or S3-compatible storage. |
+| `GCS_BUCKET` | Google Cloud Storage bucket. |
+| `MAX_FILE_SIZE` | Maximum upload size in bytes (default 2.5 GiB). |
+| `MAX_EXPIRE_SECONDS`, `MAX_DOWNLOADS` | Upper limits for the expiry delay (default 7 days) and the download count (default 100). |
+| `SEND_FOOTER_DMCA_URL` | Contact page for takedown requests, shown in the footer. |
+| `UI_COLOR_PRIMARY`, `UI_COLOR_ACCENT` | Override the theme colors (defaults `#4B5A50` and `#3E4B43`). |
 
-## Requirements
+All options and their defaults are in [server/config.js](server/config.js), with examples in [docs/docker.md](docs/docker.md). Long expiry delays on a public instance invite abuse: keep it on a LAN, behind authentication, or set a takedown contact.
 
-- [Node.js 16.x](https://nodejs.org/)
-- [Redis server](https://redis.io/) (optional for development)
-- [AWS S3](https://aws.amazon.com/s3/) or compatible service (optional)
+## Releasing
 
----
+Push a date tag to publish a dated version (and `latest`):
+
+```bash
+git tag 2026-11-09
+git push origin 2026-11-09
+```
+
+The [build-test-publish](.github/workflows/build-test-publish.yml) workflow lints and tests the code, builds the image from the latest Alpine base with no cache, smoke tests it with Redis, then pushes the multi-arch image. Pushes to `master` publish `latest`.
+
+## Building
+
+```bash
+docker build -t send .
+```
 
 ## Development
 
-To start an ephemeral development server, run:
+Requires Node.js 26 and, optionally, a Redis server.
 
-```sh
+```bash
 npm install
 npm start
 ```
 
-Then, browse to http://localhost:8080
+Then browse to http://localhost:8080.
 
----
+| Command | Description |
+| --- | --- |
+| `npm run lint` | Lints the CSS and JavaScript code. |
+| `npm test` | Runs the backend and frontend tests (the frontend tests need Chrome, point `PUPPETEER_EXECUTABLE_PATH` at it). |
+| `npm run build` | Builds the production assets. |
+| `npm run prod` | Runs the server in production configuration. |
+| `npm run format` | Formats the code with prettier. |
 
-## Commands
+## Credits
 
-| Command          | Description |
-|------------------|-------------|
-| `npm run format` | Formats the frontend and server code using **prettier**.
-| `npm run lint`   | Lints the CSS and JavaScript code.
-| `npm test`       | Runs the suite of mocha tests.
-| `npm start`      | Runs the server in development configuration.
-| `npm run build`  | Builds the production assets.
-| `npm run prod`   | Runs the server in production configuration.
-
----
-
-## Configuration
-
-The server is configured with environment variables. See [server/config.js](server/config.js) for all options and [docs/docker.md](docs/docker.md) for examples.
-
----
-
-## Localization
-
-See: [docs/localization.md](docs/localization.md)
-
----
-
-## Contributing
-
-Pull requests are always welcome! Feel free to check out the list of "good first issues" (to be implemented).
-
----
-
-## Instances
-
-Find a list of public instances here: https://github.com/timvisee/send-instances/
-
----
-
-## Deployment
-
-See: [docs/deployment.md](docs/deployment.md)
-
-Docker quickstart: [docs/docker.md](docs/docker.md)
-
-AWS example using Ubuntu Server `20.04`: [docs/AWS.md](docs/AWS.md)
-
----
-
-## Clients
-
-- Web: _this repository_
-- Command-line: [`ffsend`](https://github.com/timvisee/ffsend)
-- Android: _see [Android](#android) section_
-- Thunderbird: [FileLink provider for Send](https://addons.thunderbird.net/thunderbird/addon/filelink-provider-for-send/)
-
-#### Android
-
-The android implementation is contained in the `android` directory,
-and can be viewed locally for easy testing and editing by running `ANDROID=1 npm
-start` and then visiting <http://localhost:8080>. CSS and image files are
-located in the `android/app/src/main/assets` directory.
-
----
+Send was created by [Mozilla](https://mozilla.org) as Firefox Send and kept alive by [Tim Visee](https://timvisee.com) and the [contributors](CONTRIBUTORS) of [timvisee/send](https://gitlab.com/timvisee/send). If you find it useful, consider [donating to Tim](https://timvisee.com/donate). This fork is maintained by [PabloVTM](https://github.com/PabloVTM).
 
 ## License
 
-[Mozilla Public License Version 2.0](LICENSE)
-
-[qrcode.js](https://github.com/kazuhikoarase/qrcode-generator) licensed under MIT
-
----
+[Mozilla Public License 2.0](LICENSE). [qrcode.js](https://github.com/kazuhikoarase/qrcode-generator) is licensed under MIT.
