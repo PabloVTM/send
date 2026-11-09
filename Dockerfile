@@ -4,10 +4,13 @@
 # License https://github.com/PabloVTM/send/blob/master/LICENSE
 ##
 
-# Build project
-FROM node:26.12.1-alpine AS builder
+# Build project (the web assets are architecture independent, so this stage
+# runs natively on the build host even for an arm64 image)
+FROM --platform=$BUILDPLATFORM node:26.13.0-alpine AS builder
 
 RUN set -x \
+  # Pull in Alpine security fixes released after the base image
+  && apk --no-cache upgrade \
   # Change node uid/gid
   && apk --no-cache add shadow \
   && groupmod -g 1001 node \
@@ -34,9 +37,11 @@ RUN set -x \
     && npm run build
 
 # Main image
-FROM node:26.12.1-alpine
+FROM node:26.13.0-alpine
 
 RUN set -x \
+  # Pull in Alpine security fixes released after the base image
+  && apk --no-cache upgrade \
   # Change node uid/gid
   && apk --no-cache add shadow \
   && groupmod -g 1001 node \
