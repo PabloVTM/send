@@ -1,7 +1,7 @@
 ##
 # Send
 #
-# License https://gitlab.com/timvisee/send/blob/master/LICENSE
+# License https://github.com/PabloVTM/send/blob/master/LICENSE
 ##
 
 # Build project

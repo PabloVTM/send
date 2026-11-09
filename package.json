@@ -4,10 +4,11 @@
   "version": "3.5.1",
   "author": "Mozilla (https://mozilla.org)",
   "contributors": [
-    "Tim Visee <3a4fb3964f@sinenomine.email> (https://timvisee.com)"
+    "Tim Visee <3a4fb3964f@sinenomine.email> (https://timvisee.com)",
+    "PabloVTM (https://github.com/PabloVTM)"
   ],
-  "repository": "gitlab:timvisee/send",
-  "homepage": "https://gitlab.com/timvisee/send/",
+  "repository": "github:PabloVTM/send",
+  "homepage": "https://github.com/PabloVTM/send",
   "license": "MPL-2.0",
   "private": true,
   "scripts": {
@@ -22,14 +23,11 @@
     "format": "prettier '**/*.js' 'assets/*.css' --single-quote --write",
     "get-prod-locales": "node scripts/get-prod-locales",
     "get-prod-locales:write": "npm run get-prod-locales -- --write",
-    "contributors": "git shortlog -s | awk -F\\t '{print $2}' > CONTRIBUTORS",
-    "release": "npm-run-all contributors changelog",
     "test": "npm-run-all test:*",
     "test:backend": "nyc --reporter=lcovonly mocha --reporter=min test/backend",
     "test:frontend": "cross-env NODE_ENV=development node test/frontend/runner.js",
     "test:report": "nyc report --reporter=html",
     "test-integration": "cross-env NODE_ENV=development wdio test/wdio.docker.conf.js",
-    "circleci-test-integration": "echo 'webdriverio tests need to be updated to node 12'",
     "start": "npm run clean && cross-env NODE_ENV=development L10N_DEV=true BASE_URL=http://localhost:8080 DETECT_BASE_URL=true webpack-dev-server --mode=development",
     "android": "cross-env ANDROID=1 npm start",
     "prod": "node server/bin/prod.js"

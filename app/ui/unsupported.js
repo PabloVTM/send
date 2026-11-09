@@ -11,7 +11,7 @@ module.exports = function(state, emit) {
     why = html`
       <a
         class="text-primary"
-        href="https://github.com/timvisee/send/blob/master/docs/faq.md#why-is-my-browser-not-supported"
+        href="https://github.com/PabloVTM/send/blob/master/docs/faq.md#why-is-my-browser-not-supported"
       >
         ${state.translate('notSupportedLink')}
       </a>
